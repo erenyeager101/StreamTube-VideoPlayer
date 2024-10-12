@@ -1,12 +1,23 @@
-# Build and Deploy a Modern YouTube Clone Application in React JS with Material UI 5
+# A React based video streaming platform - StreamTube
 
-![YouTube](https://i.ibb.co/4R5RkmW/Thumbnail-5.png)
 
-### [🌟 Become a top 1% Next.js 13 developer in only one course](https://jsmastery.pro/next13)
-### [🚀 Land your dream programming job in 6 months](https://jsmastery.pro/masterclass)
 
-### Showcase your dev skills with practical experience and land the coding career of your dreams
-💻 JS Mastery Pro - https://jsmastery.pro/youtube
-✅ A special YOUTUBE discount code is automatically applied!
+## Features
+- Responsive Design: Works seamlessly on mobile and desktop devices.
+- Real-time Data Fetching: Integrates with the YouTube API for real-time video data.
 
-📙 Get the Ultimate Frontend & Backend Development Roadmaps, a Complete JavaScript Cheatsheet, Portfolio Tips, and more - https://www.jsmastery.pro/links
+- Video Player: An embedded video player for smooth playback.
+- Comments Section: Users can view and add comments on videos.
+- Related Videos: Dynamically displays related videos based on user selections.
+- Dark Mode: Elegant dark theme for an enhanced viewing experience.
+  
+## Technologies Used
+- **Frontend:** 
+  - React.js
+  - Material UI 5
+  - React Router
+  - Axios
+  
+- **Backend:**
+  - React JS
+  - Rapid API
