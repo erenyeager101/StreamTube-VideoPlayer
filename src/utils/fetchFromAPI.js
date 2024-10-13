@@ -1,26 +1,48 @@
 import axios from 'axios';
 
-export const BASE_URL = 'https://youtube-v31.p.rapidapi.com';
-export const COMMENT_URL = 'https://youtube-v31.p.rapidapi.com/commentThreads'
+// YouTube Data API base URL
+export const BASE_URL = 'https://youtube.googleapis.com/youtube/v3';
 
-const options = {
-  params: {
-    maxResults: 50,
-  },
-  headers: {
-    'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
-    'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com',
-  },
+// API key for Google API
+const API_KEY = 'AIzaSyDMTlBdi6Hpse4iRatlLE7es3SQpayJcfI';
+
+// Fetch data from YouTube API with optional pageToken for pagination
+export const fetchFromAPI = async (url, params = {}, pageToken = '') => {
+  try {
+    // Append API key and pageToken to the params object
+    const response = await axios.get(`${BASE_URL}/${url}`, {
+      params: {
+        ...params,
+        key: API_KEY, // include the API key
+        pageToken,    // include pageToken for pagination if provided
+        maxResults: 50, // Increase this to get the maximum number of videos
+      },
+    });
+    
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching data from YouTube API:', error);
+    throw error;
+  }
 };
 
-export const fetchFromAPI = async (url) => {
-  const { data } = await axios.get(`${BASE_URL}/${url}`, options);
+// Example function to fetch videos with pagination
+export const fetchVideos = async (searchQuery) => {
+  let allVideos = [];
+  let nextPageToken = '';
 
-  return data;
-};
+  do {
+    const { items, nextPageToken: newPageToken } = await fetchFromAPI('search', {
+      part: 'snippet',
+      q: searchQuery,
+      type: 'video',
+      maxResults: 50, // Maximum allowed per request
+    }, nextPageToken);
 
-export const fetchComments = async (videoId) => {
-  const { data } = await axios.get(`${COMMENT_URL}?part=snippet&videoId=${videoId}&maxResults=100`, options);
+    allVideos = [...allVideos, ...items]; // Accumulate results
+    nextPageToken = newPageToken; // Update nextPageToken for next request
 
-  return data;
+  } while (nextPageToken); // Continue fetching until no more pages
+
+  return allVideos;
 };
