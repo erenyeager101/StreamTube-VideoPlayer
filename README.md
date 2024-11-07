@@ -12,7 +12,8 @@
 - Dark Mode: Elegant dark theme for an enhanced viewing experience.
   
 ## Technologies Used
-- **Frontend:** 
+- **Frontend:**
+- Web development
   - React.js
   - Material UI 5
   - React Router
